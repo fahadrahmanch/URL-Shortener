@@ -1,0 +1,3 @@
+export const USER_REPOSITORY = Symbol("USER_REPOSITORY");
+export const TOKEN_SERVICE = "TOKEN_SERVICE";
+export const URL_REPOSITORY = Symbol("URL_REPOSITORY");
