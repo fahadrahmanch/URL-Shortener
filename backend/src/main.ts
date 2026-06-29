@@ -7,6 +7,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:5173',
       'https://url-shortener-git-main-fahads-projects-b46ae548.vercel.app',
+      
     ],
     credentials: true
   })

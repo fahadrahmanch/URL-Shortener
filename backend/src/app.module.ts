@@ -2,10 +2,12 @@ import { Module } from '@nestjs/common';
 import { AuthModule } from './infrastructure/modules/auth.modules';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UrlModule } from './infrastructure/modules/url.modules';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://fahad:TypeGrid2026@typegrid.plg9xpc.mongodb.net/url-shortener?retryWrites=true&w=majority&appName=TypeGrid'),
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRoot(process.env.MONGO_URI!),
     AuthModule,
     UrlModule
   ],
@@ -13,4 +15,3 @@ import { UrlModule } from './infrastructure/modules/url.modules';
   providers:[]  
 })
 export class AppModule {}
- 
