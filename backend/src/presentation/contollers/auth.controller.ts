@@ -11,21 +11,23 @@ import {
 import { RegisterUseCase } from "src/application/use-case/auth/register.use-case";
 import { LoginUseCase } from "src/application/use-case/auth/login.use-case";
 import { JwtAuthGuard } from "src/infrastructure/jwt/jwt-auth.guard";
+import { MESSAGES } from "src/domain/constants/messages.constant";
+import { ENDPOINTS } from "src/domain/constants/endpoints.constant";
 
-@Controller("auth")
+@Controller(ENDPOINTS.AUTH.BASE)
 export class AuthController {
     constructor(
         private readonly registerUseCase: RegisterUseCase,
         private readonly loginUseCase: LoginUseCase,
     ) {}
 
-    @Post("/register")
+    @Post(ENDPOINTS.AUTH.REGISTER)
     async register(
         @Body() data: { email: string; password: string },
     ) {
         if (!data?.email || !data?.password) {
             throw new BadRequestException(
-                "Invalid email or password",
+                MESSAGES.AUTH.INVALID_CREDENTIALS,
             );
         }
 
@@ -36,17 +38,17 @@ export class AuthController {
 
         return {
             success: true,
-            message: "User registered successfully",
+            message: MESSAGES.AUTH.REGISTER_SUCCESS,
         };
     }
 
-    @Post("/login")
+    @Post(ENDPOINTS.AUTH.LOGIN)
     async login(
         @Body() data: { email: string; password: string },
     ) {
         if (!data?.email || !data?.password) {
             throw new BadRequestException(
-                "Invalid email or password",
+                MESSAGES.AUTH.INVALID_CREDENTIALS,
             );
         }
 
@@ -58,12 +60,12 @@ export class AuthController {
 
         return {
             success: true,
-            message: "User logged in successfully",
+            message: MESSAGES.AUTH.LOGIN_SUCCESS,
             ...result,
         };
     }
 
-    @Get("/profile")
+    @Get(ENDPOINTS.AUTH.PROFILE)
     @UseGuards(JwtAuthGuard)
     getProfile(@Req() req: any) {
         return {

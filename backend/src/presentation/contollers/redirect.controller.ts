@@ -2,6 +2,7 @@ import { Controller, Get, Redirect, Param } from "@nestjs/common";
 import { FindUrlByCodeUseCase } from "src/application/use-case/url/find-url-by-code.use-case";
 import { JwtAuthGuard } from "src/infrastructure/jwt/jwt-auth.guard";
 import { UseGuards } from "@nestjs/common";
+import { ENDPOINTS } from "src/domain/constants/endpoints.constant";
 
 @Controller()
 export class RedirectController {
@@ -9,7 +10,7 @@ export class RedirectController {
         private readonly findUrlByCodeUseCase: FindUrlByCodeUseCase
     ) { }
 
-    @Get("/:code")
+    @Get(ENDPOINTS.REDIRECT.CODE)
     @Redirect()
     async findByurlCode(@Param("code") code: string) {
         console.log("code",code)

@@ -3,6 +3,7 @@ import type { IUserRepository } from "../../../domain/interfaces/user.repository
 import { USER_REPOSITORY } from "../../../domain/tokens";
 import { UserEntity } from "src/domain/entities/user.entity";
 import { HashService } from "../../services/hash.service";
+import { MESSAGES } from "src/domain/constants/messages.constant";
 
 @Injectable()
 export class RegisterUseCase {
@@ -16,7 +17,7 @@ export class RegisterUseCase {
         const alreadyexist = await this.userRepository.findByEmail(email);
        
         if (alreadyexist) {
-            throw new ConflictException("User already exists");
+            throw new ConflictException(MESSAGES.AUTH.USER_ALREADY_EXISTS);
         }
         const hashedPassword = await this.hashService.hashPassword(password);
         const newUser = new UserEntity(email, hashedPassword);
