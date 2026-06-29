@@ -56,7 +56,6 @@ export class AuthController {
             data.email,
             data.password,
         );
-        console.log("🚀 ~ AuthController ~ login ~ result:", result)
 
         return {
             success: true,

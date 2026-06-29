@@ -5,7 +5,7 @@ import { UrlModule } from './infrastructure/modules/url.modules';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://127.0.0.1:27017/url-shortener'),
+    MongooseModule.forRoot('mongodb+srv://fahad:TypeGrid2026@typegrid.plg9xpc.mongodb.net/url-shortener?retryWrites=true&w=majority&appName=TypeGrid'),
     AuthModule,
     UrlModule
   ],
