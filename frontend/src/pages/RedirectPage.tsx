@@ -17,6 +17,7 @@ const RedirectPage = () => {
         const data = await getOriginalUrlByCode(code);
     alert("sd")
         if (data.originalUrl) {
+          alert(data.originalUrl)
           window.location.href = data.originalUrl;
         } else {
           setError("Invalid response from server.");

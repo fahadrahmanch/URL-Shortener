@@ -14,7 +14,7 @@ export class GetAllUrlsUseCase {
         return urls.map(url => ({
             id: url._id.toString(),
             originalUrl: url.originalUrl,
-            shortUrl: `http://localhost:3000/${url.shortCode}`,
+            shortUrl: `https://url-shortener-backend-glf3.onrender.com/${url.shortCode}`,
             createdAt: new Date(url.createdAt).toLocaleDateString()
         }));
     }
