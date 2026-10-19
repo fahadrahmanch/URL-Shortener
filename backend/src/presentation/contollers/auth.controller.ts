@@ -46,6 +46,7 @@ export class AuthController {
     async login(
         @Body() data: { email: string; password: string },
     ) {
+       
         if (!data?.email || !data?.password) {
             throw new BadRequestException(
                 MESSAGES.AUTH.INVALID_CREDENTIALS,
@@ -56,7 +57,7 @@ export class AuthController {
             data.email,
             data.password,
         );
-
+     
         return {
             success: true,
             message: MESSAGES.AUTH.LOGIN_SUCCESS,

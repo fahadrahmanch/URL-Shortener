@@ -8,9 +8,11 @@ import { GetAllUrlsUseCase } from "../../application/use-case/url/get-all-urls.u
 import { URL_REPOSITORY } from "../../domain/tokens";
 import { UrlRepository } from "../repositories/url.repository";
 import { Url, UrlSchema } from "../db/models/url.schema";
+import { AuthModule } from "./auth.modules";
 
 @Module({
     imports: [
+        AuthModule,
         MongooseModule.forFeature([
             {
                 name: Url.name,

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { emailValidation } from "../ validation/authValidation";
 import { passwordValidation } from "../ validation/authValidation";
 import { loginAPI } from "../api/axios/authService";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -22,11 +21,13 @@ const Login: React.FC = () => {
         }
         try {
             const res = await loginAPI(email, password);
-            console.log(res.data);
-            localStorage.setItem(
-                "accessToken",
-                res.data.accessToken
-            );
+            console.log("data", res.data);
+            const token = res.data.accessToken;
+            if (!token) {
+                toast.error("Login failed: no token received");
+                return;
+            }
+            localStorage.setItem("accessToken", token);
             toast.success("Login successful!");
             navigate("/dashboard");
         } catch (error: any) {
